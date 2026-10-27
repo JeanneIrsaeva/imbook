@@ -1,0 +1,13 @@
+npm create vite@latest frontend -- --template react
+Select a framework: React
+Select a variant: JavaScript
+Which linter to use? ESLint
+npm install react-router-dom
+npm install axios
+npm install zustand
+npm install react-hook-form @hookform/resolvers yup
+npm install sonner
+npm install tailwindcss @tailwindcss/vite
+npm run dev
+npm install -D vite-plugin-svgr
+npm install lucide-react

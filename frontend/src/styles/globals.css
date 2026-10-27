@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #F3F2EC;
+  --color-paper-dark: #EFEEE8;
+  --color-gold: #9A884C;
+  --color-divider: #EDEBE4;
+  --color-ink: #181821;
+  --color-ink-soft: #111111;
+  --color-muted: #8A8A8A;
+
+  --color-footer: #EDEBE4;
+  --color-ink-deep: #1E2832;
+
+  --color-sidebar: #EDEBE4;
+  --color-sidebar-border: #94928B;
+
+  --color-book-border: #E9E7DF;
+  --color-shelf: #E0E0E0;
+  --color-arrow-border: #E5E3DA;
+
+  /* Шрифты */
+  --font-serif: "Prata", serif;
+  --font-quicksand: "Quicksand", sans-serif; 
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+}
+
+/* Глобальные стили */
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-serif;
+  }
+}

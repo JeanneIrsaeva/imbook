@@ -8,6 +8,13 @@ env/
 .pytest_cache/
 .mypy_cache/
 
+# Python
+backend/.venv/
+backend/__pycache__/
+backend/*.pyc
+backend/.env
+backend/*.db
+
 # Node
 node_modules/
 dist/

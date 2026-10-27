@@ -1,0 +1,27 @@
+# Пересоздать venv (если сломался)
+rm -rf .venv
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+# Проверить PostgreSQL в Docker
+docker logs imbook-db
+
+# Зайти в psql
+docker exec -it imbook-db psql -U tracker -d tracker
+# \dt — список таблиц
+# \q — выход
+cd C:\imbook
+docker-compose up -d
+docker ps
+# Должен быть imbook-db со статусом Up
+.venv\Scripts\Activate.ps1
+uvicorn app.main:app --reload --port 8000
+
+git status
+
+alembic revision --autogenerate -m "initial schema"
+alembic upgrade head
+docker exec -it imbook-db psql -U tracker -d tracker
+\dt
+\q
