@@ -1,41 +1,59 @@
 @import "tailwindcss";
 
 @theme {
+  /* ===== ЦВЕТА ===== */
+  /* Фоны */
   --color-paper: #F3F2EC;
   --color-paper-dark: #EFEEE8;
+  --color-card: #EDEBE4;
+  --color-sidebar: #EDEBE4;
+  --color-footer: #EDEBE4;
+
+  /* Акценты */
   --color-gold: #9A884C;
-  --color-divider: #EDEBE4;
+  --color-gold-hover: #7A6839;
+  --color-gold-light: #D7D5CC;
+
+  /* Текст */
   --color-ink: #181821;
   --color-ink-soft: #111111;
-  --color-muted: #8A8A8A;
-
-  --color-footer: #EDEBE4;
   --color-ink-deep: #1E2832;
+  --color-muted: #7A7A7A;
+  --color-placeholder: #999999;
 
-  --color-sidebar: #EDEBE4;
+  /* Границы */
+  --color-border-light: #E0E0E0;
+  --color-border-medium: #94928B;
+  --color-border-dark: #C0C0C0;
+  --color-book-border: #E9E7DF;
+
+  /* Прочее */
+  --color-shelf: #E0E0E0;
   --color-sidebar-border: #94928B;
 
-  --color-book-border: #E9E7DF;
-  --color-shelf: #E0E0E0;
-  --color-arrow-border: #E5E3DA;
-
-  /* Шрифты */
+  /* ===== ШРИФТЫ ===== */
   --font-serif: "Prata", serif;
-  --font-quicksand: "Quicksand", sans-serif; 
   --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-quicksand: "Quicksand", sans-serif;
 }
 
-/* Глобальные стили */
 @layer base {
   html, body, #root {
     height: 100%;
   }
-
   body {
     @apply bg-paper text-ink font-sans antialiased;
   }
-
   h1, h2, h3 {
     @apply font-serif;
   }
+}
+
+/* Утилитарные классы-помощники */
+@layer utilities {
+  .border-subtle { @apply border-border-light; }
+  .bg-cover-placeholder { @apply bg-paper; }
+  .text-body { @apply text-[#181821CC]; }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 }

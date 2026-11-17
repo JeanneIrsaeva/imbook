@@ -1,14 +1,13 @@
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.models.chat import Message
-
 
 class CharacterCreate(BaseModel):
     book_id: int
     name: str = Field(min_length=1, max_length=255)
     description: str | None = None
     system_prompt: str | None = None
+    photo: str | None = None
 
 
 class CharacterRead(BaseModel):
@@ -16,7 +15,9 @@ class CharacterRead(BaseModel):
     id: int
     book_id: int
     name: str
-    description: str | None
+    description: str | None = None
+    photo: str | None = None
+    is_available: bool = False  # <-- новое: доступен ли диалог
 
 
 class MessageCreate(BaseModel):
@@ -28,7 +29,7 @@ class MessageRead(BaseModel):
     id: int
     dialog_id: int
     text: str
-    sender: str           # "user" | "character"
+    sender: str
     created_at: datetime
 
 

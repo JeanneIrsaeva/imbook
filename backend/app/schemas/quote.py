@@ -15,7 +15,8 @@ class QuoteUpdate(BaseModel):
 class QuoteRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: int
-    card_id: int
+    card_id: int | None = None
+    book_id: int | None = None
     text: str
     page_number: int | None
     created_at: datetime

@@ -13,6 +13,7 @@ class NoteUpdate(BaseModel):
 class NoteRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: int
-    card_id: int
+    card_id: int | None = None
+    book_id: int | None = None
     text: str
     created_at: datetime

@@ -1,8 +1,7 @@
 from fastapi import APIRouter
-
 from app.api.v1 import (
     admin, analytics, auth, authors, books, cards,
-    characters, chat, genres, notes, publishers, quotes, reports, uploads,
+    characters, chat, genres, notes, publishers, quotes, reports, uploads, book_notes, 
 )
 
 router = APIRouter()
@@ -20,3 +19,4 @@ router.include_router(admin.router)
 router.include_router(characters.router)
 router.include_router(chat.router)
 router.include_router(uploads.router) 
+router.include_router(book_notes.router)

@@ -1,10 +1,8 @@
-// src/components/chat/ChatList.jsx
 import ChatListItem from './ChatListItem';
 
 export default function ChatList({ chats = [], activeId, onSelect }) {
   return (
-    <aside className="flex flex-col gap-1.5 h-[873px] overflow-y-auto pr-1
-                      [scrollbar-width:thin]">
+    <aside className="flex flex-col gap-4 h-full overflow-y-auto">
       {chats.map((chat) => (
         <ChatListItem
           key={chat.id}
@@ -13,6 +11,9 @@ export default function ChatList({ chats = [], activeId, onSelect }) {
           onClick={() => onSelect(chat.id)}
         />
       ))}
+      {chats.length === 0 && (
+        <p className="text-muted text-center py-8">Пока нет диалогов</p>
+      )}
     </aside>
   );
 }

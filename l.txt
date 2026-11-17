@@ -1,0 +1,78 @@
+import { NavLink } from 'react-router-dom';
+import Logo from '@assets/icons/logo.svg?react';
+import HomeIcon from '@assets/icons/home.svg?react';
+import LibraryIcon from '@assets/icons/library.svg?react';
+import ChatIcon from '@assets/icons/chat.svg?react';
+import AnalyticsIcon from '@assets/icons/analytics.svg?react';
+import { isAdmin } from '../../api/auth';
+
+const NAV_ITEMS = [
+  { to: '/', Icon: HomeIcon, label: 'Главная' },
+  { to: '/library', Icon: LibraryIcon, label: 'Моя библиотека' },
+  { to: '/chat', Icon: ChatIcon, label: 'Чат с персонажем' },
+  { to: '/analytics', Icon: AnalyticsIcon, label: 'Аналитика' },
+];
+
+export default function Sidebar() {
+  const admin = isAdmin();
+
+  return (
+    <aside
+      className="
+        w-[56px] xl:w-[68px] 2xl:w-[90px]
+        h-screen sticky top-0 bg-sidebar border-r border-sidebar-border
+        flex flex-col items-center
+        px-1 2xl:px-3
+        py-4 xl:py-5 2xl:py-6
+      "
+    >
+      {/* Логотип сверху — фиксирован */}
+      <NavLink to="/" aria-label="На главную" className="shrink-0 hover:opacity-80 transition-opacity">
+        <Logo className="w-8 h-8 xl:w-9 xl:h-9 2xl:w-12 2xl:h-12" />
+      </NavLink>
+
+      {/* Навигация — центрируется по вертикали в оставшемся пространстве */}
+      <nav
+        className="
+          flex-1
+          flex flex-col items-center justify-center w-full
+          gap-4 xl:gap-5 2xl:gap-8
+        "
+      >
+        {NAV_ITEMS.map(({ to, Icon, label }) => (
+          <NavLink key={to} to={to} aria-label={label} className="group">
+            {({ isActive }) => (
+              <Icon
+                className={`
+                  w-8 h-8 xl:w-9 xl:h-9 2xl:w-12 2xl:h-12
+                  transition-colors duration-200
+                  ${isActive ? 'text-gold' : 'text-ink-deep group-hover:text-gold'}
+                `}
+              />
+            )}
+          </NavLink>
+        ))}
+
+        {admin && (
+          <NavLink to="/admin" aria-label="Админ-панель" className="group">
+            {({ isActive }) => (
+              <span
+                className={`
+                  w-8 h-8 xl:w-9 xl:h-9 2xl:w-12 2xl:h-12
+                  rounded-full flex items-center justify-center
+                  border-2 transition-colors
+                  text-[6px] xl:text-[7px] 2xl:text-[9px] font-bold uppercase
+                  ${isActive
+                    ? 'border-gold text-gold'
+                    : 'border-ink-deep text-ink-deep group-hover:border-gold group-hover:text-gold'}
+                `}
+              >
+                Admin
+              </span>
+            )}
+          </NavLink>
+        )}
+      </nav>
+    </aside>
+  );
+}

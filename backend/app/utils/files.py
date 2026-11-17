@@ -9,11 +9,12 @@ from app.core.config import settings
 
 UPLOAD_ROOT = Path(settings.UPLOAD_DIR)
 
-
 def ensure_upload_dirs() -> None:
-    """Создать папки для загрузок, если их нет."""
     (UPLOAD_ROOT / "covers").mkdir(parents=True, exist_ok=True)
     (UPLOAD_ROOT / "avatars").mkdir(parents=True, exist_ok=True)
+    (UPLOAD_ROOT / "authors").mkdir(parents=True, exist_ok=True)
+    (UPLOAD_ROOT / "characters").mkdir(parents=True, exist_ok=True)
+    (UPLOAD_ROOT / "publishers").mkdir(parents=True, exist_ok=True)
 
 
 ALLOWED_EXTENSIONS = {

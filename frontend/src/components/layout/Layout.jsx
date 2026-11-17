@@ -1,16 +1,23 @@
-// src/components/layout/Layout.jsx
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import Sidebar from './Sidebar';
 import Header from './Header';
 import Footer from './Footer';
+import Sidebar from './Sidebar';
+import MobileMenu from './MobileMenu';
 
 export default function Layout() {
-  return (
-    <div className="flex min-h-screen bg-paper">
-      <Sidebar />
+  const [menuOpen, setMenuOpen] = useState(false);
 
-      <div className="flex flex-1 flex-col min-w-0">
-        <Header />
+  return (
+    <div className="min-h-screen flex bg-paper">
+      <div className="hidden lg:block shrink-0">
+        <Sidebar />
+      </div>
+
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+
+      <div className="flex-1 flex flex-col min-w-0">
+        <Header onMenuOpen={() => setMenuOpen(true)} />
         <main className="flex-1">
           <Outlet />
         </main>

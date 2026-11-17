@@ -1,14 +1,28 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
 import svgr from 'vite-plugin-svgr';
-import path from 'node:path';
+import tailwindcss from '@tailwindcss/vite'; // <--- ОБЯЗАТЕЛЬНО
+import path from 'path';
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), svgr()],
+  plugins: [
+    react(),
+    svgr(),
+    tailwindcss(), // <--- ДОБАВИТЬ СЮДА
+  ],
   resolve: {
     alias: {
-      '@': path.resolve(import.meta.dirname, './src'),
+      '@': path.resolve(__dirname, './src'),
+      '@assets': path.resolve(__dirname, './src/assets'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@mocks': path.resolve(__dirname, './src/mocks'),
+    },
+  },
+  server: {
+    proxy: {
+      '/api': { target: 'http://localhost:8000', changeOrigin: true },
+      '/uploads': { target: 'http://localhost:8000', changeOrigin: true },
     },
   },
 });

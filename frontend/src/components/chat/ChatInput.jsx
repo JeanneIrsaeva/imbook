@@ -1,17 +1,15 @@
-// src/components/chat/ChatInput.jsx
 import { useState } from 'react';
-import SendIcon from '@/assets/icons/send.svg?react';
+import SendIcon from '@assets/icons/send.svg?react';
 
-export default function ChatInput({ onSend }) {
+export default function ChatInput({ onSend, disabled = false }) {
   const [text, setText] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-
   const hasText = text.trim().length > 0;
   const isActive = isFocused || hasText;
 
   const handleSend = () => {
     const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!trimmed || disabled) return;
     onSend(trimmed);
     setText('');
   };
@@ -25,49 +23,41 @@ export default function ChatInput({ onSend }) {
 
   return (
     <div
-      className={`
-        border-2 rounded-[12px] p-1
-        transition-colors duration-200
-        ${isActive ? 'border-gold' : 'border-[#94928B]'}
-      `}
+      className={`border-2 rounded-[12px] p-1 transition-colors duration-200 ${
+        isActive ? 'border-gold' : 'border-border-medium'
+      }`}
     >
       <div
-        className="bg-white rounded-[10px]
-                   h-[104px] flex items-center px-6 gap-4
-                   transition-shadow duration-200"
+        className="bg-white rounded-[10px] h-[80px] sm:h-[104px] flex items-center px-4 sm:px-6 gap-3 sm:gap-4 transition-shadow duration-200"
         style={{
           boxShadow: isActive
-            ? '0 0 0 1px rgba(154, 136, 76, 0.4), 0 1px 3px rgba(0,0,0,0.08)'
+            ? '0 0 1px rgba(154,136,76,0.4), 0 1px 3px rgba(0,0,0,0.08)'
             : '0 1px 3px rgba(0,0,0,0.08)',
         }}
       >
-        {/* Текстовое поле */}
-        <textarea
+        <input
+          type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder="Введите сообщение"
-          rows={1}
-          className="flex-1 resize-none bg-transparent outline-none
-                     text-[24px] text-[#424242] placeholder:text-[#424242]
-                     max-h-[80px] py-2
-                     [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          onKeyDown={handleKeyDown}
+          placeholder="Напишите сообщение..."
+          disabled={disabled}
+          className="flex-1 bg-transparent outline-none text-[15px] sm:text-[18px] text-ink placeholder:text-placeholder disabled:opacity-60"
         />
-
-        {/* Отправить */}
         <button
           type="button"
           onClick={handleSend}
-          disabled={!hasText}
+          disabled={!hasText || disabled}
           aria-label="Отправить"
-          className="shrink-0 transition-colors duration-200
-                     text-ink hover:text-gold
-                     disabled:text-ink disabled:opacity-40
-                     disabled:hover:text-ink disabled:cursor-not-allowed"
+          className={`w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full transition-colors ${
+            hasText && !disabled
+              ? 'bg-gold text-white hover:bg-gold-hover'
+              : 'bg-paper-dark text-muted cursor-not-allowed'
+          }`}
         >
-          <SendIcon className="w-[50px] h-[50px]" />
+          <SendIcon className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
     </div>

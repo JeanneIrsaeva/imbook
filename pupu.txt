@@ -25,3 +25,8 @@ alembic upgrade head
 docker exec -it imbook-db psql -U tracker -d tracker
 \dt
 \q
+
+
+cd backend
+alembic revision --autogenerate -m "book cover"
+alembic upgrade head
